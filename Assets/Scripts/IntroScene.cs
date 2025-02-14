@@ -6,8 +6,9 @@ public class IntroScene : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] float typeSpeed = 0.2f;
+    [SerializeField] GameObject propBox;
 
-    [SerializeField] TMP_Text textObject;
+    [SerializeField] TMP_Text[] textObjects;
     string cutText;
     string cleanText = "Alright, let's clean the set.";
 
@@ -15,8 +16,12 @@ public class IntroScene : MonoBehaviour
     void Start()
     {
         StartCoroutine(Cut());
-        cutText = textObject.text;
-        textObject.text = "";
+        cutText = textObjects[0].text;
+        foreach (TMP_Text text in textObjects)
+        {
+            text.text = "";
+        }
+        propBox.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,22 +35,36 @@ public class IntroScene : MonoBehaviour
         yield return new WaitForSecondsRealtime(5);
         for (int i = 0; i < cutText.Length; i++)
         {
-            textObject.text += cutText[i];
+            foreach (TMP_Text text in textObjects)
+            {
+                text.text += cutText[i];
+            }
             yield return new WaitForSeconds(typeSpeed);
         }
         yield return new WaitForSecondsRealtime(1);
 
-        textObject.text = "";
+        foreach (TMP_Text text in textObjects)
+        {
+            text.text = "";
+        }
         cam.clearFlags = CameraClearFlags.Color;
 
         yield return new WaitForSecondsRealtime(1);
         for (int i = 0; i < cleanText.Length; i++)
         {
-            textObject.text += cleanText[i];
+            foreach (TMP_Text text in textObjects)
+            {
+                text.text += cleanText[i];
+            }
             yield return new WaitForSeconds(typeSpeed);
         }
         yield return new WaitForSecondsRealtime(1);
-        textObject.text = "";
+        foreach (TMP_Text text in textObjects)
+        {
+            text.text = "";
+        }
+
+        propBox.SetActive(true);
     }
 
 }

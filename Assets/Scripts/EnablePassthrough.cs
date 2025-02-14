@@ -22,14 +22,14 @@ public class EnablePassthrough : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            passthroughOn = !passthroughOn;
-            passthroughLayer.enabled = passthroughOn;
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    passthroughOn = !passthroughOn;
+        //    passthroughLayer.enabled = passthroughOn;
 
-            if (passthroughOn) { StartCoroutine(PassthroughFade()); }
-            else { StartCoroutine(VirtualFade()); }
-        }
+        //    if (passthroughOn) { StartCoroutine(PassthroughFade()); }
+        //    else { StartCoroutine(VirtualFade()); }
+        //}
     }
 
     public void Toggle()
@@ -41,11 +41,6 @@ public class EnablePassthrough : MonoBehaviour
 
         if (passthroughOn) { StartCoroutine(PassthroughFade()); }
         else { StartCoroutine(VirtualFade()); }
-    }
-
-    public void Passthrough(bool active)
-    {
-
     }
 
     IEnumerator PassthroughFade()
@@ -78,5 +73,6 @@ public class EnablePassthrough : MonoBehaviour
         }
         alpha = 1;
         cam.backgroundColor = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
+        yield return new WaitForSeconds(2);
     }
 }
