@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using Oculus.Interaction;
 
 public class PropBox : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class PropBox : MonoBehaviour
     [SerializeField] Color32 fullColor;
 
     int propsInBox = 0;
+    List<GameObject> props = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +37,11 @@ public class PropBox : MonoBehaviour
         {
             boxText.color = fullColor;
             EnablePassthrough.instance.Toggle();
+            //foreach (GameObject prop in props)
+            //{
+            //    prop.GetComponent<Rigidbody>().isKinematic = false;
+            //    prop.GetComponent<Rigidbody>().useGravity = true;
+            //}
         }
     }
 
@@ -48,18 +56,27 @@ public class PropBox : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Prop"))
+        if (other.CompareTag("Prop"))
         {
-            if (collision.gameObject.name == "Asteroid") { collision.gameObject.GetComponentInChildren<ParticleSystem>().Stop(); }
+            Debug.Log("prop in box");
             AddToBox(1);
+            props.Add(other.gameObject);
+            other.GetComponent<Rigidbody>().isKinematic = false;
+            other.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.name == "Asteroid") { collision.gameObject.GetComponentInChildren<ParticleSystem>().Play(); }
-        SubtractFromBox(1);
+        if (EnablePassthrough.instance.passthroughOn) { return; }
+        if (other.CompareTag("Prop") && propsInBox > 0)
+        {
+            SubtractFromBox(1);
+            props.Remove(other.gameObject);
+            other.GetComponent<Rigidbody>().isKinematic = true;
+            other.GetComponent<Rigidbody>().useGravity = false;
+        }
     }
 }

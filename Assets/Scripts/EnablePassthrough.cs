@@ -11,12 +11,14 @@ public class EnablePassthrough : MonoBehaviour
     public bool passthroughOn = false;
 
     public static EnablePassthrough instance;
+    PropBox propBox;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         passthroughLayer = FindFirstObjectByType<OVRPassthroughLayer>();
         if (instance != this) { instance = this; }
+        propBox = FindFirstObjectByType<PropBox>();
     }
 
     // Update is called once per frame
@@ -61,6 +63,7 @@ public class EnablePassthrough : MonoBehaviour
 
     IEnumerator VirtualFade()
     {
+        propBox.enabled = false;
         float alpha = 0f;
         Color c = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
         cam.backgroundColor = c;
@@ -73,6 +76,13 @@ public class EnablePassthrough : MonoBehaviour
         }
         alpha = 1;
         cam.backgroundColor = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
-        yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds(2);
+        GameObject[] props = GameObject.FindGameObjectsWithTag("Prop");
+        foreach (GameObject prop in props)
+        {
+            prop.GetComponent<Rigidbody>().isKinematic = false;
+            prop.GetComponent<Rigidbody>().useGravity = false;
+        }
+        propBox.enabled = true;
     }
 }

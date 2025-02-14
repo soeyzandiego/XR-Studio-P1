@@ -41,7 +41,7 @@ public class IntroScene : MonoBehaviour
             }
             yield return new WaitForSeconds(typeSpeed);
         }
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(2);
 
         foreach (TMP_Text text in textObjects)
         {
@@ -49,7 +49,7 @@ public class IntroScene : MonoBehaviour
         }
         cam.clearFlags = CameraClearFlags.Color;
 
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(2);
         for (int i = 0; i < cleanText.Length; i++)
         {
             foreach (TMP_Text text in textObjects)
@@ -58,7 +58,7 @@ public class IntroScene : MonoBehaviour
             }
             yield return new WaitForSeconds(typeSpeed);
         }
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(2);
         foreach (TMP_Text text in textObjects)
         {
             text.text = "";
