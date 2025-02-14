@@ -47,6 +47,7 @@ public class EnablePassthrough : MonoBehaviour
 
     IEnumerator PassthroughFade()
     {
+        propBox.enabled = false;
         float alpha = 1.0f;
         Color c = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
         cam.backgroundColor = c;
@@ -59,11 +60,18 @@ public class EnablePassthrough : MonoBehaviour
         }
         alpha = 0;
         cam.backgroundColor = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
+
+        GameObject[] props = GameObject.FindGameObjectsWithTag("Prop");
+        foreach (GameObject prop in props)
+        {
+            prop.GetComponent<Rigidbody>().isKinematic = false;
+            prop.GetComponent<Rigidbody>().useGravity = false;
+        }
+        propBox.enabled = true;
     }
 
     IEnumerator VirtualFade()
     {
-        propBox.enabled = false;
         float alpha = 0f;
         Color c = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
         cam.backgroundColor = c;
@@ -76,13 +84,6 @@ public class EnablePassthrough : MonoBehaviour
         }
         alpha = 1;
         cam.backgroundColor = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
-        //yield return new WaitForSeconds(2);
-        GameObject[] props = GameObject.FindGameObjectsWithTag("Prop");
-        foreach (GameObject prop in props)
-        {
-            prop.GetComponent<Rigidbody>().isKinematic = false;
-            prop.GetComponent<Rigidbody>().useGravity = false;
-        }
-        propBox.enabled = true;
+        //yield return new WaitForSeconds(2);   
     }
 }

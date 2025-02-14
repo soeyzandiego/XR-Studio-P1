@@ -17,6 +17,7 @@ public class PropBox : MonoBehaviour
     void Start()
     {
         boxText.color = emptyColor;
+        boxText.text = propsInBox.ToString() + "/" + propsNeeded.ToString();
     }
 
     // Update is called once per frame
@@ -31,12 +32,14 @@ public class PropBox : MonoBehaviour
 
     public void AddToBox(int amount)
     {
+        if (propsInBox >= propsNeeded && EnablePassthrough.instance.passthroughOn) { return; }
         propsInBox++;
         boxText.text = propsInBox.ToString() + "/" + propsNeeded.ToString();
         if (propsInBox >= propsNeeded)
         {
             boxText.color = fullColor;
             EnablePassthrough.instance.Toggle();
+            this.enabled = false;
             //foreach (GameObject prop in props)
             //{
             //    prop.GetComponent<Rigidbody>().isKinematic = false;
