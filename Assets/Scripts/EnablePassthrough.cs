@@ -8,12 +8,15 @@ public class EnablePassthrough : MonoBehaviour
     [SerializeField] Camera cam;
     OVRPassthroughLayer passthroughLayer;
 
-    bool passthroughOn = false;
+    public bool passthroughOn = false;
+
+    public static EnablePassthrough instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         passthroughLayer = FindFirstObjectByType<OVRPassthroughLayer>();
+        if (instance != this) { instance = this; }
     }
 
     // Update is called once per frame
@@ -29,9 +32,24 @@ public class EnablePassthrough : MonoBehaviour
         }
     }
 
+    public void Toggle()
+    {
+        StopAllCoroutines();
+
+        passthroughOn = !passthroughOn;
+        passthroughLayer.enabled = passthroughOn;
+
+        if (passthroughOn) { StartCoroutine(PassthroughFade()); }
+        else { StartCoroutine(VirtualFade()); }
+    }
+
+    public void Passthrough(bool active)
+    {
+
+    }
+
     IEnumerator PassthroughFade()
     {
-        cam.clearFlags = CameraClearFlags.SolidColor;
         float alpha = 1.0f;
         Color c = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
         cam.backgroundColor = c;
@@ -60,6 +78,5 @@ public class EnablePassthrough : MonoBehaviour
         }
         alpha = 1;
         cam.backgroundColor = new Color(cam.backgroundColor.r, cam.backgroundColor.g, cam.backgroundColor.b, alpha);
-        cam.clearFlags = CameraClearFlags.Skybox;
     }
 }
