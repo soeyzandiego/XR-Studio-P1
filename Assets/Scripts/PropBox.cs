@@ -23,12 +23,13 @@ public class PropBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (EnablePassthrough.instance.passthroughOn) { SubtractFromBox(1); }
-            else { AddToBox(1); } 
+            else { AddToBox(1); }
         }
     }
+
 
     public void AddToBox(int amount)
     {
