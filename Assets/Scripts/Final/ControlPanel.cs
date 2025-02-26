@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Meta;
+using OVR;
 
 public class ControlPanel : MonoBehaviour
 {
@@ -18,13 +20,19 @@ public class ControlPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space)) { Reposition(GameObject.Find("[BuildingBlock] Camera Rig").transform); }
     }
 
-    public void SetPanelActive(bool active)
+    public void SetPanelActive(bool active, Transform player)
     {
-        if (active) { graphics.SetActive(true); }
+        if (active) { graphics.SetActive(true); Reposition(player); }
         else { graphics.SetActive(false); }
+    }
+
+    void Reposition(Transform player)
+    {
+        transform.LookAt(-player.GetComponent<OVRCameraRig>().centerEyeAnchor.forward);
+        transform.position = player.position + player.GetComponent<OVRCameraRig>().centerEyeAnchor.forward * 2.5f;
     }
 
     public void SpawnPropBox()
