@@ -18,6 +18,7 @@ public class CleanUpButton : PokeButton
 
     public override void Press()
     {
+        base.Press();
         NewPropBox newBox = Instantiate(propBoxPrefab).GetComponent<NewPropBox>();
         newBox.InitBox(NewPropBox.State.CLEANING_UP);
     }

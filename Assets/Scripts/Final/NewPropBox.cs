@@ -26,7 +26,10 @@ public class NewPropBox : MonoBehaviour
 
     public void InitBox(PropSet set)
     {
-
+        foreach (GameObject prop in set.props)
+        {
+            // spawn in box
+        }
     }
 
     public void InitBox(State boxState)

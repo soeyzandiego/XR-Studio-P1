@@ -2,19 +2,23 @@ using UnityEngine;
 using System.Collections.Generic;
 using Meta;
 using OVR;
+using UnityEngine.UI;
 
 public class ControlPanel : MonoBehaviour
 {
     [SerializeField] GameObject graphics;
     [SerializeField] PropSet[] propSets; // will not be GameObjects
+    [SerializeField] Image propIcon;
     [SerializeField] GameObject propBoxPrefab;
 
     int propIndex;
 
+    public static ControlPanel instance;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (instance == null) { instance = this; }
     }
 
     // Update is called once per frame
@@ -48,5 +52,6 @@ public class ControlPanel : MonoBehaviour
         propIndex += dir;
         if (propIndex < 0) { propIndex = propSets.Length - 1; }
         if (propIndex > propSets.Length - 1) { propIndex = 0; }
+        propIcon.sprite = propSets[propIndex].icon;
     }
 }
