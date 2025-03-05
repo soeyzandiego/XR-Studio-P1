@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ControlPanel : MonoBehaviour
 {
+    [SerializeField] float panelPosDist = 1f;
+    float minYPos = 3f;
     [SerializeField] GameObject graphics;
     [SerializeField] PropSet[] propSets; // will not be GameObjects
     [SerializeField] Image propIcon;
@@ -19,6 +21,8 @@ public class ControlPanel : MonoBehaviour
     void Start()
     {
         if (instance == null) { instance = this; }
+        propIcon.sprite = propSets[propIndex].icon;
+        minYPos = transform.position.y;
     }
 
     // Update is called once per frame
@@ -35,8 +39,13 @@ public class ControlPanel : MonoBehaviour
 
     void Reposition(Transform player)
     {
+        Vector3 eulers = transform.eulerAngles;
         transform.LookAt(-player.GetComponent<OVRCameraRig>().centerEyeAnchor.forward);
-        transform.position = player.position + player.GetComponent<OVRCameraRig>().centerEyeAnchor.forward * 2.5f;
+        transform.eulerAngles = new Vector3(eulers.x, transform.eulerAngles.y + 180, transform.eulerAngles.z);
+        Vector3 forwardOffset = player.GetComponent<OVRCameraRig>().centerEyeAnchor.forward * panelPosDist;
+        Vector3 newPos = player.position + forwardOffset;
+        newPos.y = Mathf.Max(minYPos, newPos.y);
+        transform.position = newPos;
     }
 
     public void SpawnPropBox()
