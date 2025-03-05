@@ -21,11 +21,12 @@ public class RandomButton : PokeButton
 
     public override void Press()
     {
-        base.Press();
+        //base.Press();
         switch (type)
         {
             case RandomType.CONFETTI:
                 confetti.Play();
+                Debug.Log("played");
                 break;
             case RandomType.PROP:
                 GameObject newProp = PropManager.instance.RandomProp();
