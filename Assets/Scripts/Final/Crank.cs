@@ -27,9 +27,8 @@ public class Crank : MonoBehaviour
         //crankValue /= 2f * Mathf.PI;
 
         float diff = crankValue - lastCrankValue;
-        light.intensity += diff / 100;
+        light.intensity += diff / 1000;
 
         lastCrankValue = crankValue;
-        Debug.Log(crankValue);
     }
 }

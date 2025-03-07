@@ -41,4 +41,15 @@ public class PropManager : MonoBehaviour
 
         return allProps[Random.Range(0, allProps.Count)];
     }
+
+    public void SetObjectLock(bool locked)
+    {
+        foreach (GameObject prop in propsInScene)
+        {
+            if (prop.TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.constraints = RigidbodyConstraints.FreezePosition;
+            }
+        }
+    }
 }
