@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class KeyTurn : MonoBehaviour
 {
-    bool locked;
+    [SerializeField] AudioClip lockSound;
+    [SerializeField] AudioClip unlockSound;
 
+    bool locked = false;
     float keyRot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,20 +20,22 @@ public class KeyTurn : MonoBehaviour
         keyRot = transform.eulerAngles.y;
         if (keyRot >= 90)
         {
-            if (!locked)
+            if (locked)
             {
-                // play sound
+                GetComponent<AudioSource>().PlayOneShot(unlockSound);
                 PropManager.instance.SetObjectLock(true);
-                locked = true;
+                locked = false;
+                Debug.Log("locked");
             }
         }
         else
         {
-            if (locked)
+            if (!locked)
             {
-                // play sound
+                GetComponent<AudioSource>().PlayOneShot(lockSound);
                 PropManager.instance.SetObjectLock(false);
-                locked = false;
+                locked = true;
+                Debug.Log("unlocked");
             }
         }
     }

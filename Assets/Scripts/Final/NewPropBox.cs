@@ -29,11 +29,17 @@ public class NewPropBox : MonoBehaviour
         foreach (GameObject prop in set.props)
         {
             // spawn in box
-            GameObject newProp = Instantiate(prop, transform);
-            Vector3 newPos = new Vector3(Random.Range(-1, 1), Random.Range(-0.5f, 0.5f), Random.Range(-2, 2));
-            newProp.transform.localPosition = newPos;
-            float scale = Random.Range(0.25f, 0.55f);
+            GameObject newProp = Instantiate(prop);
+            Vector3 newPos = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(0.25f, 0.75f), Random.Range(-0.4f, 0.4f));
+            newProp.transform.position = transform.position + newPos;
+            float scale = Random.Range(0.35f, 0.6f);
             newProp.transform.localScale = new Vector3(scale, scale, scale);
+            if (newProp.TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+            }
+            PropManager.instance.AddProp(newProp);
         }
     }
 

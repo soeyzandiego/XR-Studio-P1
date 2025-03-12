@@ -28,6 +28,11 @@ public class PropManager : MonoBehaviour
 
     }
 
+    public void AddProp(GameObject newProp)
+    {
+        propsInScene.Add(newProp);
+    }
+
     public GameObject RandomProp()
     {
         List<GameObject> allProps = new List<GameObject>();
@@ -46,9 +51,13 @@ public class PropManager : MonoBehaviour
     {
         foreach (GameObject prop in propsInScene)
         {
-            if (prop.TryGetComponent<Rigidbody>(out var rb))
+            if (prop.TryGetComponent<Rigidbody>(out var rb) && locked)
             {
                 rb.constraints = RigidbodyConstraints.FreezePosition;
+            }
+            else if (!locked)
+            {
+                rb.constraints = RigidbodyConstraints.None;
             }
         }
     }

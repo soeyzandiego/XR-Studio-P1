@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   props:
-  - {fileID: 919132149155446097, guid: 4cb75ac8ff4f15c4ea4f2324f37328d3, type: 3}
+  - {fileID: 7533819386404136618, guid: 9f2cdb2ef1a2a4843821712aaa4d58a3, type: 3}
+  - {fileID: 5611354376219523719, guid: 9b76a5463e9896d4eb6ae04889a11ec3, type: 3}
+  - {fileID: 1514971743458868649, guid: b29402662d9bc394f8e3347ee3294a00, type: 3}
+  - {fileID: 8220377195066631036, guid: 3d00bf668b174ca498483b4644a4ba2e, type: 3}

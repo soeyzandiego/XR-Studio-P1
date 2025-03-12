@@ -21,14 +21,17 @@ public class Crank : MonoBehaviour
         //light.intensity = nCrankValue;
         //Debug.Log(crankValue + ", " + nCrankValue);
 
-        crankValue = transform.eulerAngles.x;
+        
+        float rotateAngle = transform.localEulerAngles.x;
+        // Convert negative angle to positive angle
+        rotateAngle = (rotateAngle > 180) ? rotateAngle - 360 : rotateAngle;
+        crankValue = rotateAngle;
+        transform.localEulerAngles = new Vector3(crankValue, transform.localEulerAngles.y, transform.localEulerAngles.z);
         //crankValue = Mathf.Atan2(transform.right.y, transform.right.x);
         //crankValue += Mathf.PI;
         //crankValue /= 2f * Mathf.PI;
 
-        float diff = crankValue - lastCrankValue;
-        light.intensity += diff / 1000;
-
-        lastCrankValue = crankValue;
+        nCrankValue = Mathf.Abs(crankValue / 90);
+        light.intensity = nCrankValue;
     }
-}
+ }

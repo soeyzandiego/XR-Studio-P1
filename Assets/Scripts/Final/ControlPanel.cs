@@ -29,6 +29,7 @@ public class ControlPanel : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) { Reposition(GameObject.Find("[BuildingBlock] Camera Rig").transform); }
+        if (Input.GetKeyDown(KeyCode.F)) { SpawnPropBox(); }
     }
 
     public void SetPanelActive(bool active, Transform player)
