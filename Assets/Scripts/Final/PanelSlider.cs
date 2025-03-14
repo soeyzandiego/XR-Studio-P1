@@ -10,6 +10,7 @@ public class PanelSlider : MonoBehaviour
     [SerializeField] float[] sourceThresholds;
     [SerializeField] Color startColor;
     [SerializeField] Color endColor;
+    [SerializeField] Renderer targetRenderer;
 
     int sourceIndex = 0;
     float sliderPos;
@@ -25,7 +26,7 @@ public class PanelSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (type == SliderType.COLOR) { sliderPos = transform.localPosition.x - slideLimit; }
+        if (type == SliderType.COLOR) { sliderPos = transform.localPosition.x + slideLimit; }
         else { sliderPos = transform.localPosition.x; }
         //for (int i = sourceThresholds.Length - 1; i > 1; i--)
         //{
@@ -49,7 +50,7 @@ public class PanelSlider : MonoBehaviour
         {
             float nSliderPos = sliderPos / (slideLimit * 2);
             Color color = Color.Lerp(startColor, endColor, nSliderPos);
-            GetComponent<Renderer>().material.color = color;
+            targetRenderer.material.color = color;
         }
 
     }
