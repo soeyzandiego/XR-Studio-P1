@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c628c51670e4c846a5cd8e6c81f4d58, type: 3}
   m_Name: Medieval
   m_EditorClassIdentifier: 
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 653731663, guid: 1aa8858eaa5e568479a19b73c332dc33, type: 3}
   props:
   - {fileID: 7298386656312071323, guid: 0dfc396611445cd42b9251835b02cc9a, type: 3}
   - {fileID: 8073608985686576694, guid: 09aae7692f171a14c80943e32008961f, type: 3}
+  - {fileID: 3194466598466325508, guid: 98debcc03597d644bb65b189e36f861f, type: 3}

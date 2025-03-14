@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c628c51670e4c846a5cd8e6c81f4d58, type: 3}
   m_Name: Space
   m_EditorClassIdentifier: 
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 1500664403, guid: 185eb1ea33222124ebc7b3617aa843f3, type: 3}
   props:
   - {fileID: 7533819386404136618, guid: 9f2cdb2ef1a2a4843821712aaa4d58a3, type: 3}
   - {fileID: 5611354376219523719, guid: 9b76a5463e9896d4eb6ae04889a11ec3, type: 3}

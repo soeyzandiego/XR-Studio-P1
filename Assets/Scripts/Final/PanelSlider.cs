@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PanelSlider : MonoBehaviour
 {
-    public enum SliderType { RADIO, COLOR };
+    public enum SliderType { RADIO, COLOR, MENU };
 
     [SerializeField] SliderType type;
     [SerializeField] float slideLimit = 0.7f;
@@ -52,7 +53,10 @@ public class PanelSlider : MonoBehaviour
             Color color = Color.Lerp(startColor, endColor, nSliderPos);
             targetRenderer.material.color = color;
         }
-
+        else if (type == SliderType.MENU)
+        {
+            if (sliderPos >= slideLimit) { SceneManager.LoadScene(1); }
+        }
     }
 
     public void SetVolume(float _vol)
