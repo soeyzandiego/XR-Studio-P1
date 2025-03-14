@@ -29,7 +29,7 @@ public class NewPropBox : MonoBehaviour
         foreach (GameObject prop in set.props)
         {
             // spawn in box
-            GameObject newProp = Instantiate(prop);
+            Prop newProp = Instantiate(prop).GetComponent<Prop>();
             Vector3 newPos = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(0.25f, 0.75f), Random.Range(-0.4f, 0.4f));
             newProp.transform.position = transform.position + newPos;
             float scale = Random.Range(0.35f, 0.6f);

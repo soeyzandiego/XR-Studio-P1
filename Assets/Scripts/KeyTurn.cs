@@ -18,6 +18,7 @@ public class KeyTurn : MonoBehaviour
     void Update()
     {
         keyRot = transform.eulerAngles.y;
+        Debug.Log(keyRot);
         if (keyRot >= 90)
         {
             if (locked)

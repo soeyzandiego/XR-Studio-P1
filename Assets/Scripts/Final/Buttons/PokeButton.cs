@@ -21,11 +21,11 @@ public abstract class PokeButton : MonoBehaviour
     {
         if (pressSound != null)
         {
-            AudioManager.instance.PlaySound(pressSound);
+            //AudioManager.instance.PlaySound(pressSound);
         }
         else
         {
-            AudioManager.instance.PlaySound("Button Press");
+            //AudioManager.instance.PlaySound("Button Press");
         }
     }
 }

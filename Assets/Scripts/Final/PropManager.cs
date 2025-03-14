@@ -6,8 +6,9 @@ using Random = UnityEngine.Random;
 public class PropManager : MonoBehaviour
 {
     [SerializeField] PropSet[] sets;
+    [SerializeField] Material lockMaterial;
 
-    List<GameObject> propsInScene = new List<GameObject>();
+    List<Prop> propsInScene = new List<Prop>();
 
     public static PropManager instance;
 
@@ -28,7 +29,7 @@ public class PropManager : MonoBehaviour
 
     }
 
-    public void AddProp(GameObject newProp)
+    public void AddProp(Prop newProp)
     {
         propsInScene.Add(newProp);
     }
@@ -49,15 +50,17 @@ public class PropManager : MonoBehaviour
 
     public void SetObjectLock(bool locked)
     {
-        foreach (GameObject prop in propsInScene)
+        foreach (Prop prop in propsInScene)
         {
             if (prop.TryGetComponent<Rigidbody>(out var rb) && locked)
             {
                 rb.constraints = RigidbodyConstraints.FreezePosition;
+                prop.ChangeMaterial(lockMaterial);
             }
             else if (!locked)
             {
                 rb.constraints = RigidbodyConstraints.None;
+                prop.ChangeMaterial();
             }
         }
     }
